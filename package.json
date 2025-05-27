@@ -1,0 +1,23 @@
+{
+  "name": "payroll_automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:auth": "playwright test tests/authentication.spec.js",
+    "test:dashboard": "playwright test tests/dashboard.spec.js",
+    "test:profiles": "playwright test tests/profiles.spec.js",
+    "test:profile": "playwright test tests/profile.spec.js",
+    "test:payflows": "playwright test tests/payflows.spec.js",
+    "test:parent-child": "playwright test tests/parent-child.spec.js",
+    "report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Playwright automation for Payroll Standard application",
+  "dependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}
+
