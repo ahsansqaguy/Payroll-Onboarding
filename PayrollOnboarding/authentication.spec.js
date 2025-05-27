@@ -37,21 +37,18 @@ test.describe('Authentication Tests', () => {
   });
 
   test('Password visibility toggle', async ({ page }) => {
-    await page.locator('#password').fill(validPassword);
-    const initialType = await page.getAttribute('#password', 'type');
-    expect(initialType).toBe('password');
+  const passwordInput = page.locator('//input[@id="password"]');
+  
+  await passwordInput.fill('test');
 
-    const parent = page.locator('#password').locator('..');
-    const toggleButton = page.locator('button').filter({ has: parent }).first();
+  await expect(passwordInput).toHaveAttribute('type', 'password');
 
-    if (await toggleButton.count() > 0) {
-      await toggleButton.click();
-      const toggledType = await page.getAttribute('#password', 'type');
-      expect(toggledType).toBe('text');
-    } else {
-      console.warn('Toggle button not found — skipping check.');
-    }
-  });
+  const toggleBtn = page.locator("(//div[@class='absolute top-1/2 flex-center -translate-y-1/2 w-4 right-4 cursor-pointer'])[1]");
+  await expect(toggleBtn).toBeVisible();
+  await toggleBtn.click();
+
+  await expect(passwordInput).toHaveAttribute('type', 'text');
+});
 
   test('Forgot Password shows up', async ({ page }) => {
     const forgotPasswordSelector = 'button:has-text("Forgot your Password?"), a:has-text("Forgot")';
